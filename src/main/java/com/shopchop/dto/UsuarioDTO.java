@@ -1,7 +1,8 @@
-package com.shopchop.model;
+package com.shopchop.dto;
 
-public class Usuario {
+import com.shopchop.entities.Usuario;
 
+public class UsuarioDTO {
     private String documento;
     private String nombre;
     private String celular;
@@ -9,15 +10,24 @@ public class Usuario {
     private String correo;
     private String contraseña;
 
-    public Usuario() {}
+    public UsuarioDTO() {}
 
-    public Usuario(String documento, String nombre, String celular, String direccion, String correo, String contraseña) {
+    public UsuarioDTO(String documento, String nombre, String celular, String direccion, String correo, String contraseña) {
         this.documento = documento;
         this.nombre = nombre;
         this.celular = celular;
         this.direccion = direccion;
         this.correo = correo;
         this.contraseña = contraseña;
+    }
+
+    public UsuarioDTO(Usuario usuario){
+        this.documento = usuario.getDocumento();
+        this.nombre = usuario.getNombre();
+        this.celular = usuario.getCelular();
+        this.direccion = usuario.getDireccion();
+        this.correo = usuario.getCorreo();
+        this.contraseña = usuario.getContraseña();
     }
 
     public String getDocumento() {
@@ -68,4 +78,3 @@ public class Usuario {
         this.contraseña = contraseña;
     }
 }
-
