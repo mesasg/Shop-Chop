@@ -1,5 +1,7 @@
 package com.shopchop.dto;
 
+import java.util.List;
+
 import com.shopchop.entities.Pedido;
 
 public class PedidoDTO {
@@ -7,6 +9,8 @@ public class PedidoDTO {
     private Short id;
     private String estado;
     private String documentoUsuario;
+    private List<PedidoProductoDTO> productos;
+
 
     public PedidoDTO() {}
 
@@ -44,6 +48,14 @@ public class PedidoDTO {
 
     public void setDocumentoUsuario(String documentoUsuario) {
         this.documentoUsuario = documentoUsuario;
+    }
+    
+    public List<PedidoProductoDTO> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<PedidoProductoDTO> productos) {
+        this.productos = productos;
     }
 
     @Override

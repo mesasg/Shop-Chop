@@ -1,35 +1,42 @@
 package com.shopchop.entities;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Pedido")
+@Table(name = "pedido")
 public class Pedido {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
-    @Column(name = "estado", length = 10, nullable = false)
-    @NotBlank
+    @Column(nullable = false)
     private String estado;
 
+    
     @ManyToOne
     @JoinColumn(name = "documentoUsuario", nullable = false)
     @NotNull
     private Usuario usuario;
 
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PedidoProducto> productos;
+
     public Pedido() {}
 
-    public Pedido(Short id, String estado, Usuario usuario) {
-        this.id = id;
+    public Pedido(String estado, Usuario usuario) {
         this.estado = estado;
         this.usuario = usuario;
     }
@@ -58,12 +65,11 @@ public class Pedido {
         this.usuario = usuario;
     }
 
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", estado='" + estado + '\'' +
-                ", usuario=" + (usuario != null ? usuario.getDocumento() : "null") +
-                '}';
+    public List<PedidoProducto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<PedidoProducto> productos) {
+        this.productos = productos;
     }
 }

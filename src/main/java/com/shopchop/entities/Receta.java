@@ -1,11 +1,16 @@
 package com.shopchop.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -35,6 +40,9 @@ public class Receta {
     @JoinColumn(name = "documentoUsuario", nullable = false)
     @NotNull
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "receta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecetaProducto> recetaProducto = new ArrayList<>();
 
     public Receta() {}
 
@@ -84,6 +92,14 @@ public class Receta {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<RecetaProducto> getRecetaProducto() {
+        return recetaProducto;
+    }
+
+    public void setRecetaProducto(List<RecetaProducto> recetaProducto) {
+        this.recetaProducto = recetaProducto;
     }
 
     @Override

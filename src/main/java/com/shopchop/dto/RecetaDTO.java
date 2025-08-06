@@ -1,5 +1,7 @@
 package com.shopchop.dto;
 
+import java.util.List;
+
 import com.shopchop.entities.Receta;
 
 public class RecetaDTO {
@@ -9,11 +11,10 @@ public class RecetaDTO {
     private String descripcion;
     private byte[] foto;
     private String documentoUsuario;
+    private List<ProductoDTO> productos;
 
-    // Constructor vacío
     public RecetaDTO() {}
 
-    // Constructor completo
     public RecetaDTO(Short id, String nombre, String descripcion, byte[] foto, String documentoUsuario) {
         this.id = id;
         this.nombre = nombre;
@@ -22,7 +23,6 @@ public class RecetaDTO {
         this.documentoUsuario = documentoUsuario;
     }
 
-    // Constructor que recibe una entidad Receta
     public RecetaDTO(Receta receta) {
         this.id = receta.getId();
         this.nombre = receta.getNombre();
@@ -31,7 +31,6 @@ public class RecetaDTO {
         this.documentoUsuario = receta.getUsuario() != null ? receta.getUsuario().getDocumento() : null;
     }
 
-    // Getters y Setters
     public Short getId() {
         return id;
     }
@@ -70,6 +69,14 @@ public class RecetaDTO {
 
     public void setDocumentoUsuario(String documentoUsuario) {
         this.documentoUsuario = documentoUsuario;
+    }
+
+    public List<ProductoDTO> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<ProductoDTO> productos) {
+        this.productos = productos;
     }
 
     @Override

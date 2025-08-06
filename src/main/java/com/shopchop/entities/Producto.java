@@ -1,8 +1,13 @@
 package com.shopchop.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +30,9 @@ public class Producto {
     @NotNull
     @DecimalMin(value = "0.0", inclusive = false)
     private Float precio;
+    
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PedidoProducto> pedidos = new ArrayList<>();
 
     public Producto() {}
 
@@ -32,6 +40,14 @@ public class Producto {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
+    }
+    
+    public List<PedidoProducto> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<PedidoProducto> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public Short getId() {

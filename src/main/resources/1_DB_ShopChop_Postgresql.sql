@@ -60,7 +60,7 @@ CREATE TABLE ProductoEnReceta(
 );
 
 -- Tabla relacion Productos En Pedido
-CREATE TABLE ProductoEnPedido(
+CREATE TABLE PedidoProducto(
     IDProducto SMALLINT NOT NULL,
     IDPedido SMALLINT NOT NULL,
     cantidad INTEGER NOT NULL,
