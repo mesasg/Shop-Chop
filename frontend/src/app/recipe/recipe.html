@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop&Chop</title>
+    <link rel="stylesheet" href="recipe.css">
+</head>
+<body>
+    <!-- Recipe Detail Section -->
+            <div id="recipeDetailSection" class="recipe-detail">
+                <button class="btn" onclick="showHome()" style="margin-bottom: 20px;">← Volver</button>
+                <div class="recipe-detail-header">
+                    <div class="recipe-detail-image" id="detailImage">🍝</div>
+                    <div class="recipe-detail-info">
+                        <h1 class="recipe-detail-title" id="detailTitle">Nombre de la Receta</h1>
+                        <p class="recipe-detail-author" id="detailAuthor">Por: Usuario</p>
+                        <button class="btn add-to-cart-btn" onclick="addRecipeToCart()">Agregar al Carrito</button>
+                    </div>
+                </div>
+                
+                <div class="ingredients-list">
+                    <h3>Ingredientes</h3>
+                    <ul id="detailIngredients">
+                        <!-- Ingredients will be populated here -->
+                    </ul>
+                </div>
+
+                <div class="steps-list">
+                    <h3>Pasos de Preparación</h3>
+                    <ol id="detailSteps">
+                        <!-- Steps will be populated here -->
+                    </ol>
+                </div>
+
+                <div class="comments-section">
+                    <h3>Comentarios</h3>
+                    <div id="commentsList">
+                        <!-- Comments will be populated here -->
+                    </div>
+                    <div class="form-group">
+                        <textarea id="newComment" placeholder="Agregar un comentario..." style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; min-height: 100px; resize: vertical;"></textarea>
+                        <button class="btn" onclick="addComment()" style="margin-top: 10px;">Comentar</button>
+                    </div>
+                </div>
+            </div>
+            <script src="..\..\functions.js"></script>
+</body>
+</html>

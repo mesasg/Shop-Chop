@@ -1,0 +1,123 @@
+.recipe-detail {
+    display: none;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin: 20px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.recipe-detail-header {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.recipe-detail-image {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, #E2E5D2, #B15836);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: white;
+}
+
+.recipe-detail-info {
+    flex: 1;
+}
+
+.recipe-detail-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.recipe-detail-author {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.ingredients-list, .steps-list {
+    margin: 30px 0;
+}
+
+.ingredients-list h3, .steps-list h3 {
+    color: #B15836;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.ingredients-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.ingredients-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.steps-list ol {
+    padding-left: 20px;
+}
+
+.steps-list li {
+    margin: 15px 0;
+    line-height: 1.6;
+}
+
+.comments-section {
+    margin-top: 40px;
+    border-top: 2px solid #eee;
+    padding-top: 30px;
+}
+
+.comment {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.comment-author {
+    font-weight: bold;
+    color: #B15836;
+    margin-bottom: 5px;
+}
+
+.add-to-cart-btn {
+    background-color: #28a745;
+    margin-top: 20px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #218838;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #B15836;
+}

@@ -1,0 +1,32 @@
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    
+}
+.principal-logo{
+        width: 300px;
+    
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.search-input {
+    padding: 10px 15px;
+    border: 2px solid #B15836;
+    border-radius: 25px;
+    outline: none;
+    min-width: 400px;
+}
+.header {
+    background-color: #E2E5D2;
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
+}
