@@ -1,0 +1,450 @@
+### Obtener todos los usuarios
+GET http://localhost:8080/usuarios
+Accept: application/json
+
+### Obtener un usuario por su documento
+GET http://localhost:8080/usuarios?documento=3030303030
+Accept: application/json
+
+### Crear un nuevo usuario
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+  "documento": "3030303030",
+  "nombre": "Pedro Ramirez",
+  "celular": "3001112233",
+  "direccion": "Carrera 12 # 34-56",
+  "correo": "pedro.ramirez@example.com",
+  "contraseña": "password123"
+}
+
+###
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+"documento": "1010101010",
+"nombre": "Juan Perez",
+"celular": "3001234567",
+"direccion": "Calle 10 # 5-20",
+"correo": "juan.perez@example.com",
+"contraseña": "pass123"
+}
+
+###
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+"documento": "2020202020",
+"nombre": "Maria Gomez",
+"celular": "3109876543",
+"direccion": "Avenida 20 # 15-30",
+"correo": "maria.gomez@example.com",
+"contraseña": "pass456"
+}
+
+### Actualizar un usuario existente
+PUT http://localhost:8080/usuarios/3030303030
+Content-Type: application/json
+
+{
+  "nombre": "Pedro Ramirez - Actualizado",
+  "celular": "3001112233",
+  "direccion": "Carrera 12 # 34-56",
+  "correo": "pedro.ramirez.updated@example.com",
+  "contraseña": "password123"
+}
+
+### Eliminar un usuario
+DELETE http://localhost:8082/api/usuarios/3030303030
+
+
+
+### PRODUCTOS
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+"id": 1,
+"nombre": "Tomate",
+"precio": 2.50
+}
+
+###
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+"id": 2,
+"nombre": "Cebolla",
+"precio": 1.80
+}
+
+### 🚀 Paso 1: Inicializar la base de datos con datos de prueba 
+# Es importante ejecutar estos POSTs primero para crear las entidades base
+# (Usuarios y Productos) que otras entidades (Pedidos, Recetas, etc.) necesitan.
+
+# ----------------------------------------------------
+# A. Endpoints de Usuario
+# Base URL: /usuarios
+# ----------------------------------------------------
+
+
+# GET: Obtener todos los Usuarios
+GET http://localhost:8080/usuarios
+Accept: application/json
+
+###
+
+# GET: Obtener un Usuario por documento
+GET http://localhost:8080/usuarios?documento=1010101010
+Accept: application/json
+
+###
+
+# PUT: Actualizar Usuario
+# Nota: La URL del endpoint es '/usuarios/{documento}'
+PUT http://localhost:8080/usuarios/1010101010
+Content-Type: application/json
+
+{
+  "documento": "1010101010",
+  "nombre": "Juan Perez Actualizado",
+  "celular": "3001112233",
+  "direccion": "Calle 10 # 5-20",
+  "correo": "juan.perez.updated@example.com",
+  "contraseña": "pass_nueva"
+}
+
+###
+
+# ----------------------------------------------------
+# B. Endpoints de Producto
+# Base URL: /productos
+# ----------------------------------------------------
+
+# POST: Crear Producto 1
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+  "id": 3,
+  "nombre": "Carne de cerdo",
+  "precio": 5.50
+}
+
+###
+
+# POST: Crear Producto 2
+POST http://localhost:8080/productos
+Content-Type: application/json
+
+{
+  "id": 4,
+  "nombre": "leche",
+  "precio": 2.80
+}
+
+###
+
+# GET: Obtener todos los Productos
+GET http://localhost:8080/productos
+Accept: application/json
+
+###
+
+# GET: Obtener un Producto por ID
+GET http://localhost:8080/productos/1
+Accept: application/json
+
+###
+
+# DELETE: Eliminar Producto
+# Se comenta para que no elimine el dato que otras entidades necesitan.
+# DELETE http://localhost:8080/productos/2
+
+###
+
+# ----------------------------------------------------
+# C. Endpoints de Pedido
+# Base URL: /pedidos
+# ----------------------------------------------------
+
+# POST: Crear un Pedido
+# Nota: "usuario" solo necesita el "documento" para la relación.
+POST http://localhost:8080/pedidos
+Content-Type: application/json
+
+{
+    "id": "1",
+  "estado": "EN_PROCESO",
+  "documento": "1010101010"
+}
+
+###
+
+# GET: Obtener todos los Pedidos
+GET http://localhost:8080/pedidos
+Accept: application/json
+
+###
+
+# GET: Obtener un Pedido por ID
+# Asume que el ID del pedido creado es 1 (depende del `GeneratedValue`)
+GET http://localhost:8080/pedidos/1
+Accept: application/json
+
+###
+
+# ----------------------------------------------------
+# D. Endpoints de Receta
+# Base URL: /recetas
+# ----------------------------------------------------
+
+# POST: Crear una Receta
+POST http://localhost:8080/recetas
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Ensalada Fresca",
+  "descripcion": "Una deliciosa ensalada con lechuga, tomate y cebolla.",
+  "foto": "SGVsbG8sIHRoaXMgZGF0YSBpcyBiYXNlNjQgaW1hZ2UgaW5mbw==",
+  "usuario": {
+    "documento": "2020202020"
+  }
+}
+
+###
+
+# GET: Obtener todas las Recetas
+GET http://localhost:8080/recetas
+Accept: application/json
+
+###
+
+# GET: Obtener Recetas por Usuario
+GET http://localhost:8080/recetas/usuario/2020202020
+Accept: application/json
+
+###
+
+# PUT: Actualizar una Receta
+PUT http://localhost:8080/recetas/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "nombre": "Ensalada Fresca Actualizada",
+  "descripcion": "Una ensalada con tomate y cebolla, ahora mas fresca.",
+  "foto": "SGVsbG8sIHRoaXMgZGF0YSBpcyBiYXNlNjQgaW1hZ2UgaW5mbw==",
+  "usuario": {
+    "documento": "2020202020"
+  }
+}
+
+###
+
+# GET: Obtener los productos de una receta
+# Este endpoint debería funcionar después de crear RecetaProducto.
+# GET http://localhost:8080/recetas/1/productos
+# Accept: application/json
+
+###
+
+# ----------------------------------------------------
+# E. Endpoints de Critica
+# Base URL: /criticas
+# ----------------------------------------------------
+
+# POST: Crear una Critica
+# Nota: Las relaciones necesitan los IDs existentes.
+POST http://localhost:8080/criticas
+Content-Type: application/json
+
+{
+  "id": 1,
+  "comentario": "Excelente receta, muy facil de seguir.",
+  "usuario": {
+    "documento": "1010101010"
+  },
+  "receta": {
+    "id": 1
+  }
+}
+
+###
+
+# GET: Obtener todas las Criticas
+GET http://localhost:8080/criticas
+Accept: application/json
+
+###
+
+# GET: Obtener Criticas por Usuario
+GET http://localhost:8080/criticas/usuario/1010101010
+Accept: application/json
+
+###
+
+# GET: Obtener Criticas por Receta
+GET http://localhost:8080/criticas/receta/1
+Accept: application/json
+
+###
+
+# PUT: Actualizar una Critica
+PUT http://localhost:8080/criticas/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "comentario": "¡Esta receta es fantastica!",
+  "usuario": {
+    "documento": "1010101010"
+  },
+  "receta": {
+    "id": 1
+  }
+}
+
+###
+
+# DELETE: Eliminar una Critica
+# Se comenta para que no elimine el dato.
+# DELETE http://localhost:8080/criticas/1
+
+###
+
+# ----------------------------------------------------
+# F. Endpoints de RecetaProducto
+# Base URL: /recetas-productos
+# ----------------------------------------------------
+
+# POST: Crear una relación Receta-Producto
+# Nota: Necesita que existan la Receta 1 y el Producto 1 y 2.
+POST http://localhost:8080/recetas-productos
+Content-Type: application/json
+
+{
+  "receta": {
+    "id": 1
+  },
+  "producto": {
+    "id": 1
+  },
+  "cantidad": 2
+}
+
+###
+
+# POST: Crear otra relación Receta-Producto
+POST http://localhost:8080/recetas-productos
+Content-Type: application/json
+
+{
+  "receta": {
+    "id": 1
+  },
+  "producto": {
+    "id": 2
+  },
+  "cantidad": 1
+}
+
+###
+
+# GET: Obtener todas las Recetas-Productos
+GET http://localhost:8080/recetas-productos
+Accept: application/json
+
+###
+
+# GET: Obtener una relación por ID
+# Asume que el ID es 1 (depende de `GeneratedValue`).
+GET http://localhost:8080/recetas-productos/1
+Accept: application/json
+
+###
+
+# PUT: Actualizar una relación Receta-Producto
+PUT http://localhost:8080/recetas-productos/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "receta": {
+    "id": 1
+  },
+  "producto": {
+    "id": 1
+  },
+  "cantidad": 5
+}
+
+###
+
+# DELETE: Eliminar una relación Receta-Producto
+# Se comenta para que no elimine el dato.
+# DELETE http://localhost:8080/recetas-productos/2
+
+###
+
+# ----------------------------------------------------
+# G. Endpoints de PedidoProducto
+# Base URL: /pedido-productos
+# ----------------------------------------------------
+
+# POST: Crear una relación Pedido-Producto
+# Nota: Necesita que existan el Pedido 1 y el Producto 1.
+POST http://localhost:8080/pedido-productos
+Content-Type: application/json
+
+{
+  "pedido": {
+    "id": 1
+  },
+  "producto": {
+    "id": 1
+  },
+  "cantidad": 3
+}
+
+###
+
+# GET: Obtener todas las relaciones Pedido-Producto
+GET http://localhost:8080/pedido-productos
+Accept: application/json
+
+###
+
+# GET: Obtener por Pedido
+GET http://localhost:8080/pedido-productos/pedido/1
+Accept: application/json
+
+###
+
+# GET: Obtener por Producto
+GET http://localhost:8080/pedido-productos/producto/1
+Accept: application/json
+
+###
+
+# GET: Obtener por IDs (pedidoId y productoId)
+# NOTA: Este endpoint tiene una sintaxis especial en tu controller.
+# GET http://localhost:8080/pedido-productos/1/1
+# Accept: application/json
+
+###
+
+# DELETE: Eliminar una relación Pedido-Producto
+# Se comenta para que no elimine el dato.
+# DELETE http://localhost:8080/pedido-productos/1
+
+###
+
+# DELETE: Eliminar el usuario Juan Perez
+# Se comenta para que no elimine el dato.
+# DELETE http://localhost:8080/usuarios/1010101010

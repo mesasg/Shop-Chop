@@ -57,6 +57,18 @@ public class PedidoProductoServiceImpl implements PedidoProductoService {
         pedidoProductoRepository.deleteById(id);
     }
 
+    @Override
+    public PedidoProductoDTO getPedidoProductoByIds(Short pedidoId, Short productoId) {
+        List<PedidoProducto> pedidoProductos = pedidoProductoRepository.findByPedido_IdAndProducto_Id(pedidoId, productoId);
+
+        if (pedidoProductos.isEmpty()) {
+            throw new RuntimeException("PedidoProducto no encontrado");
+        }
+
+        PedidoProducto pedidoProducto = pedidoProductos.get(0);
+        return toDTO(pedidoProducto);
+    }
+
     private PedidoProductoDTO toDTO(PedidoProducto pedidoProducto) {
         PedidoProductoDTO dto = new PedidoProductoDTO();
         dto.setId(pedidoProducto.getId());

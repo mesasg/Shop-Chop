@@ -5,8 +5,6 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -19,10 +17,10 @@ import jakarta.validation.constraints.NotNull;
 public class Pedido {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private Short id;
 
-    @Column(nullable = false)
+    @Column(name = "estado", nullable = false)
     private String estado;
 
     
@@ -36,7 +34,7 @@ public class Pedido {
 
     public Pedido() {}
 
-    public Pedido(String estado, Usuario usuario) {
+    public Pedido(Short id, String estado, Usuario usuario) {
         this.estado = estado;
         this.usuario = usuario;
     }

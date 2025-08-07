@@ -11,4 +11,5 @@ public interface PedidoProductoService {
     List<PedidoProductoDTO> findByProductoId(Short idProducto);
     PedidoProductoDTO save(PedidoProductoDTO pedidoProductoDTO);
     void deleteById(Long id);
+    PedidoProductoDTO getPedidoProductoByIds(Short pedidoId, Short productoId);
 }

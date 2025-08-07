@@ -13,7 +13,7 @@ import jakarta.validation.constraints.NotNull;
 public class Critica {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     private Short id;
 
     @Column(name = "comentario", columnDefinition = "TEXT", nullable = false)

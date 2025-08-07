@@ -44,6 +44,12 @@ public class PedidoProductoController {
         return ResponseEntity.ok(pedidoProductoService.findByProductoId(idProducto));
     }
 
+    @GetMapping("/{pedidoId}/{productoId}")
+    public ResponseEntity<PedidoProductoDTO> getPedidoProducto(@PathVariable Short pedidoId, @PathVariable Short productoId) {
+        PedidoProductoDTO dto = pedidoProductoService.getPedidoProductoByIds(pedidoId, productoId);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
     public ResponseEntity<PedidoProductoDTO> create(@RequestBody PedidoProductoDTO dto) {
         PedidoProductoDTO created = pedidoProductoService.save(dto);

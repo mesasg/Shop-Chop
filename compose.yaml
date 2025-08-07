@@ -18,20 +18,22 @@ services:
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U administrador"]
+      test: ["CMD-SHELL", "pg_isready -U shopchop"]
       interval: 5s
       timeout: 5s
       retries: 5
     environment:
+      POSTGRES_USER: shopchop
       POSTGRES_PASSWORD: example
+      POSTGRES_DB: shopchop
     ports:
-      - 5439:5432
+      - 5433:5432
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8080
+  #adminer:
+  #  image: adminer
+  #  restart: always
+  #  ports:
+  #    - 8081:8080
   backend:
     build:
       context: .
@@ -41,8 +43,14 @@ services:
         condition: service_healthy
     ports:
       - 8080:8080
-    env_file:
-      - .env
+    environment:
+      - DB_HOST=db
+      - POSTGRES_PASSWORD= example
+      - POSTGRES_DB= shopchop
+      - POSTGRES_USER=shopchop
+      - DB_USER= shopchop
+      - DB_PASSWORD= example
+
 volumes:
   data:
   

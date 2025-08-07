@@ -18,7 +18,7 @@ import jakarta.validation.constraints.Size;
 public class Producto {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     private Short id;
 
     @Column(name = "nombre", length = 20, nullable = false)

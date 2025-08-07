@@ -20,7 +20,7 @@ import jakarta.validation.constraints.Size;
 public class Receta {
 
     @Id
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     private Short id;
 
     @Column(name = "nombre", length = 40)
