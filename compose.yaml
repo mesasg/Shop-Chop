@@ -1,9 +1,58 @@
+# Use postgres/example user/password credentials
 services:
-  postgres:
-    image: 'postgres:latest'
+
+  db:
+    image: postgres
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    volumes:
+      - ./src/main/resources/:/docker-entrypoint-initdb.d/.
+      - data:/var/lib/postgresql/data
+    env_file:
+      - \.env
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shopchop"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_USER: shopchop
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: shopchop
     ports:
-      - '5432'
+      - 5433:5432
+
+  #adminer:
+  #  image: adminer
+  #  restart: always
+  #  ports:
+  #    - 8081:8080
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    environment:
+      - DB_HOST=db
+      - POSTGRES_PASSWORD= example
+      - POSTGRES_DB= shopchop
+      - POSTGRES_USER=shopchop
+      - DB_USER= shopchop
+      - DB_PASSWORD= example
+
+volumes:
+  data:
+  
+
+
