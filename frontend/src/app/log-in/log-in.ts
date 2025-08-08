@@ -1,16 +1,20 @@
 import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-log-in',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './log-in.html',
   styleUrl: './log-in.css'
+  
 })
 
 export class LogIn {
   itsMain = false;
+  correo = new FormControl('');
+  contrasena = new FormControl('');
 
   constructor(private router: Router){
     this.router.events
@@ -26,5 +30,9 @@ export class LogIn {
 
   closeModal() {
     this.router.navigate(['/'], { state: { isLoggedIn: true } });
+  }
+
+  autentificar(){
+
   }
 }

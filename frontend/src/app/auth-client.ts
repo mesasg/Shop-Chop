@@ -11,7 +11,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 export class AuthClient {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
-  private readonly apiUrl = `${environment.apiUrl}/users`;
+  private readonly apiUrl = `${environment.apiUrl}`;
   private readonly tokenKey = 'jwt_token';
 
   private readonly currentUserSignal = signal<Usuario | null>(null);
@@ -84,7 +84,7 @@ export class AuthClient {
   logout(): void {
     this.removeToken();
     this.currentUserSignal.set(null);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/log-in']);
   }
 
   getToken(): string | null {
