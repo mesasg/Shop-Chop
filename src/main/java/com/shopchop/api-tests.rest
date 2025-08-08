@@ -6,6 +6,15 @@ Accept: application/json
 GET http://localhost:8080/usuarios?documento=3030303030
 Accept: application/json
 
+###
+POST http://localhost:8080/authenticate
+Content-Type: application/json
+
+{
+"correo": "juan.perez@example.com",
+"password": "pass123"
+}
+
 ### Crear un nuevo usuario
 POST http://localhost:8080/usuarios
 Content-Type: application/json

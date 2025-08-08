@@ -36,8 +36,8 @@ public class Usuario {
     @Size(max = 50)
     private String correo;
 
-    @Column(name = "contraseña", length = 20)
-    @Size(max = 20)
+    @Column(name = "contraseña", length = 100)
+    @Size(max = 100)
     private String contraseña;
 
     public Usuario() {}
