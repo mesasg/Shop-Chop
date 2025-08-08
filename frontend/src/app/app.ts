@@ -10,8 +10,11 @@ import { filter } from 'rxjs';
   styleUrl: './app.css'
 })
 export class App {
+  searchQuery = '';
+  isLoggedIn = false;
   protected readonly title = signal('angularSC');
   itsMain = false;
+  cartCount = 0;
 
   constructor(private router: Router){
     this.router.events
@@ -23,5 +26,12 @@ export class App {
 
   goToLogIn(){
     this.router.navigate(["src\app\log-in\log-in.html"]);
+  }
+  logout() {
+    console.log('Cerrar sesión');
+  }
+
+  showCart() {
+    console.log('Mostrar carrito');
   }
 }

@@ -14,27 +14,35 @@
     <div class="principal-logo">
       <img src="../assets/logo.png">
     </div>
+
     <div class="header-right">
-      <!-- <input type="search" class="search-input" placeholder="Buscar recetas..." [(ngModel)]="searchQuery"> -->
+      <input type="search"
+             class="search-input"
+             placeholder="Buscar recetas..."
+             (input)="searchQuery = $event.target.value">
 
-      <div *ngIf="!isLoggedIn">
-        <a routerLink="/log-in" class="btn">Iniciar sesión</a>
-        <a routerLink="/register" class="btn">Registrarse</a>
-      </div>
+      @if (!isLoggedIn) {
+        <div id="authButtons">
+          <a routerLink="/log-in" class="btn">Iniciar sesión</a>
+          <a routerLink="/register" class="btn">Registrarse</a>
+        </div>
+      } @else {
+        <div id="userButtons">
+          <a routerLink="/profile" class="btn">Perfil</a>
+          <a routerLink="/orders" class="btn">Mis pedidos</a>
+          <button class="btn" (click)="logout()">Cerrar sesión</button>
+        </div>
+      }
 
-      <div *ngIf="isLoggedIn">
-        <a routerLink="/profile" class="btn">Perfil</a>
-        <a routerLink="/orders" class="btn">Mis pedidos</a>
-        <!-- <button class="btn" (click)="logout()">Cerrar sesión</button> -->
-      </div>
-
-      <!-- <div class="cart-icon" (click)="showCart()"> -->
+      <div class="cart-icon" (click)="showCart()">
         🛒
-        <!-- <span class="cart-count">{{ cartCount }}</span> -->
-      <!-- </div> -->
+        <span class="cart-count">{{ cartCount }}</span>
+      </div>
     </div>
   </div>
 </div>
+
+
 
 
 <!-- Header
