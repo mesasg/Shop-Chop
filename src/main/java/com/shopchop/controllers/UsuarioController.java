@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.shopchop.dto.AuthResponse;
+import com.shopchop.dto.LoginRequest;
 import com.shopchop.dto.UsuarioDTO;
+import com.shopchop.security.JwtUtil;
 import com.shopchop.services.UsuarioService;
 
 @RestController
@@ -22,6 +25,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping("/usuarios")
     public List<UsuarioDTO> getUsuarios(@RequestParam(required = false) String param) {
@@ -44,5 +50,37 @@ public class UsuarioController {
     public ResponseEntity<Void> deleteCritica(@PathVariable String documento) {
         usuarioService.delete(documento);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            System.out.println("loginRequest");
+            if (loginRequest.getCorreo() == null || loginRequest.getPassword() == null) {
+                return ResponseEntity.badRequest().build();
+            }
+
+            UsuarioDTO authenticatedUser = usuarioService.authenticateUser(
+                loginRequest.getCorreo(), 
+                loginRequest.getPassword()
+            );
+
+            if (authenticatedUser != null) {
+                String token = jwtUtil.generateToken(
+                    authenticatedUser.getCorreo()
+                );
+                
+                AuthResponse authResponse = new AuthResponse(
+                    token, 
+                    authenticatedUser.getCorreo()
+                );
+                
+                return ResponseEntity.ok(authResponse);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 401 Unauthorized
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

@@ -9,4 +9,5 @@ public interface UsuarioService {
     UsuarioDTO save(UsuarioDTO usuarioDTO);
     UsuarioDTO update(String documento, UsuarioDTO usuarioDTO);
     void delete(String documento);
+    public UsuarioDTO authenticateUser(String username, String password);
 }

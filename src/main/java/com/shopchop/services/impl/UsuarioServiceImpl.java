@@ -1,9 +1,11 @@
 package com.shopchop.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.shopchop.dto.UsuarioDTO;
@@ -16,6 +18,9 @@ public class UsuarioServiceImpl implements  UsuarioService {
     
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
     @Override
     public List<UsuarioDTO> findAll(){
@@ -26,6 +31,9 @@ public class UsuarioServiceImpl implements  UsuarioService {
     @Override
     public UsuarioDTO save(UsuarioDTO usuarioDTO){
         Usuario usuario = convertToEntity(usuarioDTO);
+        if (usuarioDTO.getContraseña() != null && !usuarioDTO.getContraseña().isEmpty()) {
+            usuario.setContraseña(passwordEncoder.encode(usuarioDTO.getContraseña()));
+        }
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return convertToDTO(savedUsuario);
     }
@@ -55,6 +63,17 @@ public class UsuarioServiceImpl implements  UsuarioService {
     @Override
     public void delete(String documento){
         usuarioRepository.deleteById(documento);
+    }
+    
+    @Override
+    public UsuarioDTO authenticateUser(String username, String password) {
+        Optional<Usuario> user = usuarioRepository.findByCorreo(username);
+        System.out.println("Authenticating user: " + username);
+        if (user.isPresent() && passwordEncoder.matches(password, user.get().getContraseña())) {
+            System.out.println("User authenticated successfully: " + user.get().getCorreo());
+            return convertToDTO(user.get());
+        }
+        return null;
     }
 
     private UsuarioDTO convertToDTO(Usuario usuario){
