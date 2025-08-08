@@ -19,7 +19,6 @@ export class Register {
   email: string = '';
   identificacion: string = '';
   contrasena: string = '';
-  telefono: string = '';
   direccion: string = '';
   celular: string= '';
 
@@ -41,7 +40,6 @@ export class Register {
       email: this.email,
       contraseña: this.contrasena,
       identificacion: this.identificacion,
-      telefono: this.telefono,
       direccion: this.direccion,
       celular: this.celular,
     };
@@ -49,7 +47,8 @@ export class Register {
     console.log('Datos de registro:', datos);
     this.router.navigate(['/']);
 
-    // Aquí puedes hacer la petición HTTP al backend si quieres
-    // this.http.post('/api/registro', datos).subscribe(...)
+  }
+  closeModal() {
+    this.router.navigate(['/']);
   }
 }

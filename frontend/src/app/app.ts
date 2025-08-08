@@ -19,10 +19,18 @@ export class App {
   protected readonly title = signal('angularSC');
 
   constructor(private router: Router) {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation?.extras?.state as { isLoggedIn?: boolean };
+
+    if (state?.isLoggedIn) {
+      this.isLoggedIn = true;
+    }
+
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showHeader = !event.urlAfterRedirects.includes('/log-in') && !event.urlAfterRedirects.includes('/register');
-      });
-  }
+        this.showHeader = !event.urlAfterRedirects.includes('/log-in') &&
+                          !event.urlAfterRedirects.includes('/register');
+      });
+  }
 }

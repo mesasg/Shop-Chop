@@ -23,6 +23,8 @@ export class LogIn {
   goToOrders(){
     this.router.navigate(['order/order.html']);
   }
- 
-  
+
+  closeModal() {
+    this.router.navigate(['/'], { state: { isLoggedIn: true } });
+  }
 }

@@ -22,16 +22,16 @@ export class PedidosProductosApi{
         this.isLoadingSignal.set(true);
 
         return this.http.get<PedidoProducto[]>(this.apiUrl)
-          .pipe(
-            tap(this.pedidoProd => {
-              this.pedidoProductoSignal.set(this.pedidoProd);
-              this.isLoadingSignal.set(false);
-            }),
-            catchError(error => {
-              this.isLoadingSignal.set(false);
-              return this.handleError(error);
-            })
-          );
+        .pipe(
+          tap((pedidoProd: PedidoProducto[]) => {
+            this.pedidoProductoSignal.set(pedidoProd);
+            this.isLoadingSignal.set(false);
+          }),
+          catchError(error => {
+            this.isLoadingSignal.set(false);
+            return this.handleError(error);
+          })
+        );
       }
 
       getPedidoProdById(id: number): Observable<PedidoProducto> {

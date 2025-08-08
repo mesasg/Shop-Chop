@@ -1,39 +1,39 @@
 
-        <div class="auth-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <div class="auth-left">
-                <h2 style="color: #B15836; margin-bottom: 30px;">Registrarse</h2>
-                <form (ngSubmit)="enviarRegistro()" #registerForm="ngForm">
-  <div class="form-group">
-    <label>Correo Electrónico</label>
-    <input type="email" [(ngModel)]="email" name="email" required />
-  </div>
-  <div class="form-group">
-    <label>Identificación</label>
-    <input type="text" [(ngModel)]="identificacion" name="identificacion" required />
-  </div>
-  <div class="form-group">
-    <label>Contraseña</label>
-    <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
-  </div>
-  <div class="form-group">
-    <label>Teléfono</label>
-    <input type="text" [(ngModel)]="telefono" name="telefono" required />
-  </div>
-  <div class="form-group">
-    <label>Dirección</label>
-    <input type="text" [(ngModel)]="direccion" name="direccion" required />
-  </div>
-  <div class="form-group">
-    <label>Celular</label>
-    <input type="text" [(ngModel)]="celular" name="celular" required />
-  </div>
+<div class="auth-content">
+    <button class="close-btn" (click)="closeModal()">&times;</button>
+    <div class="auth-left">
+        <h2 style="color: #B15836; margin-bottom: 30px;">Registrarse</h2>
+        <form (ngSubmit)="enviarRegistro()" #registerForm="ngForm">
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" [(ngModel)]="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label>Identificación</label>
+            <input type="text" [(ngModel)]="identificacion" name="identificacion" required />
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
+          </div>
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" [(ngModel)]="direccion" name="direccion" required />
+          </div>
+          <div class="form-group">
+            <label>Celular</label>
+            <input type="text" [(ngModel)]="celular" name="celular" required />
+          </div>
 
-  <button type="submit" class="btn">Registrarse</button>
-</form>
+          <button type="submit" class="btn">Registrarse</button>
+    </form>
             </div>
             <div class="auth-right">
-                <div class="logo">RecipeShare</div>
+                <div class="logo">Shop&Chop</div>
                 <p class="auth-message">"Comparte el sabor de tus recuerdos y descubre nuevos mundos en cada receta."</p>
             </div>
         </div>
