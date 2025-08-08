@@ -30,3 +30,16 @@
     z-index: 1000;
     
 }
+.cart-icon {
+    background-color: #B15836;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+}
