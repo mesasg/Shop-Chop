@@ -1,5 +1,4 @@
 .profile-container {
-    display: none;
     background: white;
     border-radius: 20px;
     padding: 40px;
@@ -38,14 +37,15 @@
     margin-top: 30px;
 }
 .create-recipe-container {
-    display: none;
     background: white;
     border-radius: 20px;
     padding: 40px;
     margin: 20px 0;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-
+.hidden {
+    display: none;
+} 
 .ingredient-input-group {
     display: flex;
     gap: 10px;

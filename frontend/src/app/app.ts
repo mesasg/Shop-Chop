@@ -1,36 +1,38 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
-// 1. Importa CommonModule aquí
 import { CommonModule } from '@angular/common';
+import { Auth } from './auth'; // Asegúrate de que la ruta del servicio sea correcta
 
 @Component({
   selector: 'app-root',
-  // 2. Añade CommonModule a la lista de imports
+  standalone: true,
   imports: [RouterOutlet, RouterLink, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   showHeader: boolean = true;
   isLoggedIn: boolean = false; 
   cartCount= 0;
   protected readonly title = signal('angularSC');
 
-  constructor(private router: Router) {
-    const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras?.state as { isLoggedIn?: boolean };
-
-    if (state?.isLoggedIn) {
-      this.isLoggedIn = true;
-    }
-
+  constructor(private router: Router, private auth: Auth) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.showHeader = !event.urlAfterRedirects.includes('/log-in') &&
-                          !event.urlAfterRedirects.includes('/register');
+                         !event.urlAfterRedirects.includes('/register');
       });
+  }
+
+  ngOnInit(): void {
+    // Nos suscribimos al Observable de isLoggedIn$ de nuestro servicio de autenticación.
+    // Esto asegura que la propiedad 'isLoggedIn' de este componente se mantenga
+    // sincronizada con el estado global de la aplicación.
+    this.auth.isLoggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 }

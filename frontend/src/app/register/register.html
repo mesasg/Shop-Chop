@@ -5,6 +5,10 @@
         <h2 style="color: #B15836; margin-bottom: 30px;">Registrarse</h2>
         <form (ngSubmit)="enviarRegistro()" #registerForm="ngForm">
           <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" [(ngModel)]="nombre" name="nombre" required />
+          </div>
+          <div class="form-group">
             <label>Correo Electrónico</label>
             <input type="email" [(ngModel)]="email" name="email" required />
           </div>
@@ -13,20 +17,16 @@
             <input type="text" [(ngModel)]="identificacion" name="identificacion" required />
           </div>
           <div class="form-group">
-            <label>Contraseña</label>
-            <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
-          </div>
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" [(ngModel)]="nombre" name="nombre" required />
-          </div>
-          <div class="form-group">
             <label>Dirección</label>
             <input type="text" [(ngModel)]="direccion" name="direccion" required />
           </div>
           <div class="form-group">
             <label>Celular</label>
             <input type="text" [(ngModel)]="celular" name="celular" required />
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label>
+            <input type="password" [(ngModel)]="contrasena" name="contrasena" required />
           </div>
 
           <button type="submit" class="btn">Registrarse</button>

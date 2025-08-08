@@ -1,44 +1,27 @@
 <div class="main-container">
-
-  <!--
-    Usamos la directiva @if para mostrar u ocultar el encabezado.
-    La variable showHeader se controla desde el archivo app.component.ts.
-    Cuando showHeader es false, este bloque completo se elimina del DOM.
-  -->
   @if (showHeader) {
     <div class="header">
       <div class="header-content">
         <div class="principal-logo">
-          <!-- Usar routerLink en el logo es una buena práctica para volver al inicio -->
-          <!-- <a routerLink="/"><img src="../assets/logo.png" ></a> -->
+
         </div>
         <div class="header-right">
-          <!-- Botones de navegación para usuarios no logueados -->
           <div *ngIf="!isLoggedIn">
         
             <button routerLink="/log-in" class="btn">Iniciar sesión</button>
             <button routerLink="/register" class="btn">Registrarse</button>
           </div>
           <button class="cart-icon" routerLink="/cart"> 🛒 <span class="cart-count">{{ cartCount }}</span> </button>
-          
-          <!-- Botones de navegación para usuarios logueados -->
+          <div class="ShowLog-in">
           <div *ngIf="isLoggedIn">
-            <a routerLink="/profile" class="btn">Perfil</a>
-            <a routerLink="/orders" class="btn">Mis pedidos</a>
-            <!-- <button class="btn" (click)="logout()">Cerrar sesión</button> -->
-            
-      
+            <button routerLink="/profile" class="btn">Perfil</button>
+            <button routerLink="/order" class="btn">Mis pedidos</button>   
+          </div>
           </div>
         </div>
       </div>
     </div>
   }
-
-  <!-- 
-    Aquí se renderizarán los componentes de cada página (log-in, register, home, etc.).
-    El contenido de router-outlet es lo que cambia, mientras que el header (si showHeader es true) 
-    se mantiene visible.
-  -->
   <router-outlet></router-outlet>
 </div>
 
