@@ -1,26 +1,24 @@
-<div id="createRecipeSection" class="create-recipe-container">
-            <h2 style="color: #B15836; margin-bottom: 30px;">Crear Nueva Receta</h2>
-            
-            <form id="createRecipeForm">
+<div>
+<h2 style="color: #B15836; margin-bottom: 30px;">Crear Nueva Receta</h2>
+<form (ngSubmit)="enviarReceta()" #recetaForm="ngForm" id="createRecipeForm">
                 <div class="form-group">
                     <label>Nombre de la Receta</label>
-                    <input type="text" id="recipeName" required>
-                </div>
-                
+                    <input type="text" id="recipeName"  [(ngModel)]="nombre" name="nombre" required>
+                </div>         
                 <div class="form-group">
                     <label>Ingredientes</label>
                     <div id="ingredientsList">
                         <div class="ingredient-input-group">
-                            <input type="text" placeholder="Ingrediente" class="ingredient-name">
-                            <input type="text" placeholder="Cantidad" class="ingredient-quantity">
-                            <button type="button" class="add-ingredient-btn" onclick="addIngredientField()">+</button>
+                            <input [(ngModel)]="ingrediente" name="ingrediente" type="text" placeholder="Ingrediente" class="ingredient-name">
+                            <input [(ngModel)]="cantidad" name="cantidad" type="text" placeholder="Cantidad" class="ingredient-quantity">
+                            <button type="button" class="add-ingredient-btn" (click)="addIngredient()">+</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Pasos de Preparación</label>
-                    <textarea class="step-input" placeholder="Describe todos los pasos de preparación..." id="recipeSteps"></textarea>
+                    <textarea [(ngModel)]="pasos" name="pasos" class="step-input" placeholder="Describe todos los pasos de preparación..." id="recipeSteps"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -30,4 +28,5 @@
 
                 <button type="submit" class="btn" style="width: 100%; padding: 15px; font-size: 18px;">Crear Receta</button>
             </form>
+
 </div>
