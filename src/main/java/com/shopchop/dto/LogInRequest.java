@@ -1,23 +1,23 @@
 package com.shopchop.dto;
 
-public class LogInRequest {
-    private String username;
+public class LoginRequest {
+    private String correo;
     private String password;
 
-    public LogInRequest() {
+    public LoginRequest() {
     }
 
-    public LogInRequest(String username, String password) {
-        this.username = username;
+    public LoginRequest(String correo, String password) {
+        this.correo = correo;
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPassword() {
@@ -31,7 +31,7 @@ public class LogInRequest {
     @Override
     public String toString() {
         return "LoginRequest{" +
-                "username='" + username + '\'' +
+                "correo='" + correo + '\'' +
                 '}';
     }
 }

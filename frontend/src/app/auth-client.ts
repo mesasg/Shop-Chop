@@ -26,19 +26,23 @@ export class AuthClient {
   }
 
   private initializeAuth(): void {
-    const token = this.getToken();
-    if (token && !this.isTokenExpired(token)) {
-      // Decode token to get user info
-      const userInfo = this.decodeToken(token);
-      if (userInfo) {
-        this.currentUserSignal.set({
-          correo: userInfo.correo,
-        });
-      }
-    } else {
-      this.logout();
+  const token = this.getToken();
+  if (token && !this.isTokenExpired(token)) {
+    const userInfo = this.decodeToken(token);
+    if (userInfo) {
+      this.currentUserSignal.set({
+        correo: userInfo.correo ?? '',
+        documento: userInfo.documento ?? '',
+        nombre: userInfo.nombre ?? '',
+        celular: userInfo.celular ?? '',
+        direccion: userInfo.direccion ?? '',
+        contraseña: '' // nunca guardes la real aquí
+      });
     }
+  } else {
+    this.logout();
   }
+}
 
   login(credentials: LoginRequest): Observable<AuthResponse> {
     this.isLoadingSignal.set(true);
