@@ -11,6 +11,7 @@ import { Auth } from '../auth'; // Asegúrate de que esta ruta sea correcta
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
+
 export class Register {
 
   itsRegister = false;

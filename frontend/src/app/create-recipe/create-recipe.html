@@ -1,5 +1,7 @@
-<div>
+<div class="auth-content">
 <h2 style="color: #B15836; margin-bottom: 30px;">Crear Nueva Receta</h2>
+<button class="close-btn" (click)="closeModal()">&times;</button>
+
 <form (ngSubmit)="enviarReceta()" #recetaForm="ngForm" id="createRecipeForm">
                 <div class="form-group">
                     <label>Nombre de la Receta</label>
@@ -13,6 +15,11 @@
                             <input [(ngModel)]="cantidad" name="cantidad" type="text" placeholder="Cantidad" class="ingredient-quantity">
                             <button type="button" class="add-ingredient-btn" (click)="addIngredient()">+</button>
                         </div>
+                        <ul>
+                            <li *ngFor="let ing of ingredientes">
+                            {{ ing.nombre }} - {{ ing.cantidad }}
+                            </li>
+                            </ul>
                     </div>
                 </div>
 

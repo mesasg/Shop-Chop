@@ -18,12 +18,22 @@ export class App implements OnInit {
   cartCount= 0;
   protected readonly title = signal('angularSC');
 
-  constructor(private router: Router, private auth: Auth) {
+    constructor(private router: Router, private auth: Auth) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.showHeader = !event.urlAfterRedirects.includes('/log-in') &&
-                         !event.urlAfterRedirects.includes('/register');
+        const url = event.urlAfterRedirects;
+
+        // Ocultamos solo en estas páginas
+        const ocultarEn = ['/log-in', '/register', '/create-recipe'];
+
+        // Si la ruta empieza por profile y el usuario está loggeado, no ocultar el header
+        if (url.startsWith('/profile') && this.isLoggedIn) {
+          this.showHeader = true;
+        } else {
+          this.showHeader = !ocultarEn.some(ruta => url.startsWith(ruta));
+        }
+        
       });
   }
 

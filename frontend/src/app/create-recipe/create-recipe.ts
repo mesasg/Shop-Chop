@@ -3,15 +3,19 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.html',
   styleUrls: ['./create-recipe.css'],
-  imports: [FormsModule],
+  imports: [CommonModule,  
+    FormsModule],
 })
 
 export class CreateRecipe {
+
+
   // Variables del formulario
   nombre: string = '';
   ingrediente: string = '';
@@ -41,20 +45,27 @@ export class CreateRecipe {
     console.log('Receta enviada:', receta);
 
     // Redirige al home o a otra ruta tras guardar
-    this.router.navigate(['/']);
+    this.router.navigate(['/profile'], {
+    state: { desdeCreateRecipe: true }
+  });
   }
 
   // Método para agregar un ingrediente
   addIngredient() {
-    if (this.ingrediente && this.cantidad) {
-      this.ingredientes.push({ nombre: this.ingrediente, cantidad: this.cantidad });
-      this.ingrediente = '';
-      this.cantidad = '';
-    }
+  if (this.ingrediente && this.cantidad) {
+    this.ingredientes.push({
+      nombre: this.ingrediente,
+      cantidad: this.cantidad
+    });
+
+    // Limpiar los campos después de agregar
+    this.ingrediente = '';
+    this.cantidad = '';
   }
+}
 
   closeModal() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/profile']);
   }
 }
 
